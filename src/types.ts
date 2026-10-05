@@ -18,9 +18,11 @@ export type TypografFieldHookOptions = {
   isLocalized?: boolean
 }
 
+type LooseSlug<T extends string> = T | (string & Record<never, never>)
+
 export type TypografPluginOptions = {
-  collections?: CollectionSlug[]
-  globals?: GlobalSlug[]
+  collections?: LooseSlug<CollectionSlug>[]
+  globals?: LooseSlug<GlobalSlug>[]
   locale?: string
   locales?: Record<string, string>
   rules?: TypografRuleOptions

@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-10-05
+
+### Fixed
+
+- `collections` and `globals` accept plain `string` slugs (e.g. `Posts.slug`) when Payload generated types are present, instead of failing type-checking.
+
 ## [0.1.0] - 2026-10-05
 
 ### Added
@@ -17,5 +23,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Per-field and per-container opt-out via `custom: { typograf: false }`.
 - Locale mapping for localized fields via the `locales` option.
 
-[Unreleased]: https://github.com/vajajak/payload-plugin-typograf/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/vajajak/payload-plugin-typograf/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/vajajak/payload-plugin-typograf/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/vajajak/payload-plugin-typograf/releases/tag/v0.1.0
