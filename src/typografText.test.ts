@@ -29,6 +29,17 @@ describe('typografText', () => {
     expect(typografText('<b>s námi</b> Tom &amp; Jerry')).toBe(`<b>s${NBSP}námi</b> Tom &amp; Jerry`)
   })
 
+  it.each(['&nbsp;', '&copy;', '&mdash;', '&#160;', '&#60;b&#62;', '&#x3C;b&#x3E;', '&#128512;', '&#0;'])(
+    'keeps the %s entity untouched',
+    (entity) => {
+      expect(typografText(`Napište ${entity} pro`)).toBe(`Napište ${entity} pro`)
+    },
+  )
+
+  it('inserts non-breaking spaces around entities', () => {
+    expect(typografText('a &nbsp;s námi')).toBe(`a${NBSP}&nbsp;s${NBSP}námi`)
+  })
+
   it('preserves surrounding and repeated whitespace', () => {
     expect(typografText('  s  námi  ')).toBe(`  s${NBSP} námi  `)
   })

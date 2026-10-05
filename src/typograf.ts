@@ -8,6 +8,8 @@ const Typograf = TypografModule as unknown as typeof TypografModule.default
 
 type TypografInstance = InstanceType<typeof Typograf>
 
+const HTML_ENTITY_PATTERN = /&(?:#\d{1,7}|#x[\da-f]{1,6}|[a-z\d]{2,31});/gi
+
 const instances = new Map<string, TypografInstance>()
 
 const toArray = (value: string | string[] | undefined): string[] => (value === undefined ? [] : [value].flat())
@@ -28,6 +30,7 @@ const createTypograf = (locale: string, rules: TypografRuleOptions): TypografIns
     disableRule: '*',
     enableRule: [DEFAULT_RULE, ...toArray(rules.enableRule)],
   })
+  typograf.addSafeTag(HTML_ENTITY_PATTERN)
   typograf.setSetting(DEFAULT_RULE, 'lengthShortWord', DEFAULT_LENGTH_SHORT_WORD)
   typograf.disableRule(toArray(rules.disableRule))
   applySettings(typograf, rules.settings)
