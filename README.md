@@ -61,7 +61,26 @@ typografPlugin({
 { name: 'slug', type: 'text', custom: { typograf: false } }
 ```
 
-On a container field (`group`, `array`, `tabs`, …) the opt-out skips everything inside it.
+On a container field (`group`, `array`, `tabs`, …), a single tab or a block, the opt-out skips everything inside it.
+
+## Slugs and search
+
+Saved text contains U+00A0 instead of a regular space after short words. Payload's built-in `slugField()` only treats regular spaces as separators, so `Jdu s námi` would become `jdu-snmi`. Give `slugField` a slugify that splits on any whitespace (`\s` matches U+00A0):
+
+```ts
+import { slugField } from 'payload'
+
+slugField({
+  slugify: ({ valueToSlugify }) =>
+    String(valueToSlugify ?? '')
+      .trim()
+      .replace(/\s+/g, '-')
+      .replace(/[^\w-]+/g, '')
+      .toLowerCase(),
+})
+```
+
+The same applies to `equals` / `contains` queries on processed fields: a query typed with regular spaces will not match the stored U+00A0, so run the query string through `typografText` first.
 
 ## Utilities
 
