@@ -13,6 +13,14 @@
   ],
   "license": "MIT",
   "author": "Vítězslav Špiřík",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vajajak/payload-plugin-typograf.git"
+  },
+  "homepage": "https://github.com/vajajak/payload-plugin-typograf#readme",
+  "bugs": {
+    "url": "https://github.com/vajajak/payload-plugin-typograf/issues"
+  },
   "type": "module",
   "exports": {
     ".": {
