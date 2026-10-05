@@ -1,0 +1,64 @@
+{
+  "name": "@vajajak/payload-plugin-typograf",
+  "version": "0.0.0",
+  "description": "Payload CMS plugin that inserts non-breaking spaces after single-letter words (Czech prepositions and conjunctions) using typograf.",
+  "keywords": [
+    "payload",
+    "payload-plugin",
+    "payloadcms",
+    "typograf",
+    "typography",
+    "nbsp",
+    "czech"
+  ],
+  "license": "MIT",
+  "author": "Vítězslav Špiřík",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "!src/**/*.test.ts",
+    "CHANGELOG.md"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": "^18.20.2 || >=20.9.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.build.json",
+    "dev": "tsc -p tsconfig.build.json --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint .",
+    "type-check": "tsc --noEmit",
+    "check": "publint && attw --pack . --profile esm-only && npm pack --dry-run",
+    "prepublishOnly": "npm run build && npm run lint && npm run type-check && npm run test && npm run check"
+  },
+  "peerDependencies": {
+    "payload": "^3.0.0"
+  },
+  "dependencies": {
+    "typograf": "^7.8.0"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.5",
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^22.20.5",
+    "eslint": "^10.12.0",
+    "payload": "3.80.0",
+    "publint": "^0.3.25",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.71.0",
+    "vitest": "^5.0.3"
+  }
+}
