@@ -72,12 +72,16 @@ const postsConfig = () =>
             tabs: [
               { label: 'Unnamed', fields: [{ name: 'unnamedTabText', type: 'text' }] },
               { name: 'namedTab', fields: [{ name: 'namedTabText', type: 'text' }] },
+              { label: 'Skipped', custom: { typograf: false }, fields: [{ name: 'skippedTabText', type: 'text' }] },
             ],
           },
           {
             name: 'layout',
             type: 'blocks',
-            blocks: [{ slug: 'hero', fields: [{ name: 'blockText', type: 'text' }] }],
+            blocks: [
+              { slug: 'hero', fields: [{ name: 'blockText', type: 'text' }] },
+              { slug: 'skipped', custom: { typograf: false }, fields: [{ name: 'skippedBlockText', type: 'text' }] },
+            ],
           },
           { name: 'slug', type: 'text', custom: { typograf: false } },
           {
@@ -114,7 +118,7 @@ describe('typografPlugin', () => {
     expect(getBeforeChangeHooks(config, 'posts', fieldName)).toHaveLength(1)
   })
 
-  it.each(['views', 'slug', 'skippedGroupText'])('does not add a hook to "%s"', (fieldName) => {
+  it.each(['views', 'slug', 'skippedGroupText', 'skippedTabText', 'skippedBlockText'])('does not add a hook to "%s"', (fieldName) => {
     const config = typografPlugin({ collections: ['posts'] })(postsConfig())
 
     expect(getBeforeChangeHooks(config, 'posts', fieldName)).toHaveLength(0)

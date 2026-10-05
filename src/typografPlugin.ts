@@ -14,7 +14,7 @@ type FieldHooks = NonNullable<TextField['hooks']>
 
 const isLocalizedContainer = (container: object) => 'localized' in container && container.localized === true
 
-const isOptedOut = (field: Field) => 'custom' in field && field.custom?.typograf === false
+const isOptedOut = (config: { custom?: Record<string, unknown> }) => config.custom?.typograf === false
 
 const withLocalizedAncestor = (context: TransformContext, container: object): TransformContext => ({
   ...context,
@@ -29,15 +29,11 @@ const appendTypografHook = (hooks: FieldHooks | undefined, context: TransformCon
   ],
 })
 
-const transformTab = (tab: Tab, context: TransformContext): Tab => ({
-  ...tab,
-  fields: transformFields(tab.fields, withLocalizedAncestor(context, tab)),
-})
+const transformTab = (tab: Tab, context: TransformContext): Tab =>
+  isOptedOut(tab) ? tab : { ...tab, fields: transformFields(tab.fields, withLocalizedAncestor(context, tab)) }
 
-const transformBlock = (block: Block, context: TransformContext): Block => ({
-  ...block,
-  fields: transformFields(block.fields, context),
-})
+const transformBlock = (block: Block, context: TransformContext): Block =>
+  isOptedOut(block) ? block : { ...block, fields: transformFields(block.fields, context) }
 
 const transformField = (field: Field, context: TransformContext): Field => {
   if (isOptedOut(field)) {
