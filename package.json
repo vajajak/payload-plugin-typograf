@@ -1,6 +1,6 @@
 {
   "name": "@vajajak/payload-plugin-typograf",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Payload CMS plugin that inserts non-breaking spaces after single-letter words (Czech prepositions and conjunctions) using typograf.",
   "keywords": [
     "payload",
